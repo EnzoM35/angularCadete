@@ -1,0 +1,29 @@
+<mat-toolbar class="toolbar-main">
+  <mat-toolbar-row>
+    <span><a class="logo" [routerLink]="['/home']" routerLinkActive="router-link-active">TODO
+        IT</a></span>
+    <span class="spacer"></span>
+    <button mat-icon-button class="icon" aria-label="icon-button with menu icon" [matMenuTriggerFor]="menu">
+      <mat-icon>menu</mat-icon>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item [routerLink]="['/requestTravel']" routerLinkActive="router-link-active"
+          *ngIf="isLoginRoute()">
+          <mat-icon class="toolbar-icon">class</mat-icon>Solicitar viaje
+        </button>
+        <button mat-menu-item [routerLink]="['/statusTravel']" routerLinkActive="router-link-active"
+          *ngIf="isLoginRoute()">
+          <mat-icon class="toolbar-icon">assignment_late</mat-icon>Estado del viaje
+        </button>
+        <button mat-menu-item [routerLink]="['/history']" routerLinkActive="router-link-active" *ngIf="isLoginRoute()">
+          <mat-icon class="toolbar-icon">assignment_turned_in</mat-icon>Historial
+        </button>
+        <button (click)="clearStorage()" *ngIf="isLoginRoute()" routerLink="/login" mat-menu-item>
+          <mat-icon class="toolbar-icon">logout</mat-icon>Cerrar Sesión
+        </button>
+        <button *ngIf="!isLoginRoute()" mat-menu-item>
+          <mat-icon class="toolbar-icon">help</mat-icon>Ayuda
+        </button>
+      </mat-menu>
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>
