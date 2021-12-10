@@ -1,0 +1,12 @@
+mat-card {
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
+  //margin: 0 auto;
+  text-align: left;
+  padding: 1em;
+  line-height: 0.5;
+  .Like {
+    padding-top: 3%;
+  }
+}

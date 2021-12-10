@@ -5,10 +5,10 @@ import {
   Validators,
   FormGroupDirective,
 } from '@angular/forms';
-//import { userLog } from 'src/app/model/userLog.model';
-//import { loginService } from 'src/app/pages/services/loginService';
+import { userLog } from '../../model/userLog.model';
+import { loginService } from '../../services/serviceLogin';
 import { Router } from '@angular/router';
-//import { DialogComponent } from '../dialog/dialog.component';
+import { DialogComponent } from '../dialog/dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
@@ -18,7 +18,7 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class LoginComponent implements OnInit {
   constructor(
-    //private loginService: loginService,
+    private loginService: loginService,
     private router: Router,
     public dialog: MatDialog
   ) {}
@@ -27,51 +27,57 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  /*user: userLog = {
+  user: userLog = {
     email: '',
     password: '',
-  };*/
+    rol: {
+      id: -1,
+    },
+  };
 
   loginForm = new FormGroup({
-    email: new FormControl(''),
-    password: new FormControl(''),
+    email: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required),
   });
 
   submit(formDirective: FormGroupDirective): void {
-    /*//LOGIN
-    this.user = this.loginForm.value;
-    this.loginService.login(this.user.email, this.user.password).subscribe(
-      (resp) => {
-        //SETTERS
-        localStorage.setItem('userLoged', JSON.stringify(this.user.email));
-        localStorage.setItem('id', JSON.stringify(resp.id));
-        localStorage.setItem('nombre', JSON.stringify(resp.fullName));
-        localStorage.setItem('direccion', JSON.stringify(resp.address));
-
-        //GETTERS
-        localStorage.getItem('id');
-        localStorage.getItem('userLoged');
-
-        this.isHomeRoute();
-      },
-      (error) => {
-        this.openDialog();
-      }
-    );
+    this.login();
     formDirective.resetForm();
-    this.loginForm.reset();*/
+    this.loginForm.reset();
   }
 
   //redirección a home de cadetes
-  isHomeRoute() {
-    return this.router.navigate(['home']);
+  isTravelsRoute() {
+    return this.router.navigate(['dashboard/travels']);
   }
 
   //Diálogo para datos erróneos
-  openDialog() {
-    /*this.dialog.open(DialogComponent, {
+  openDialog(mensaje: string) {
+    this.dialog.open(DialogComponent, {
+      data: mensaje,
       width: '350px',
-    });*/
+    });
   }
 
+  login(): void {
+    //LOGIN
+    this.user = this.loginForm.value;
+
+    this.loginService.login(this.user.email, this.user.password).subscribe(
+      (resp) => {
+        if (resp.rol.id === 2) {
+          localStorage.setItem('UserLoged', JSON.stringify(resp));
+          console.log('Logeado con éxtito');
+          this.isTravelsRoute();
+        } else {
+          this.openDialog(
+            'Estás intentando acceder desde una cuenta que no es de Cadete'
+          );
+        }
+      },
+      (error) => {
+        this.openDialog('Datos érroneos, usuario o contraseña inválidos.');
+      }
+    );
+  }
 }

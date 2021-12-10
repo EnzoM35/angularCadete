@@ -1,0 +1,37 @@
+<section class="travelMain">
+  <div class="info">
+    <form>
+      <mat-form-field appearance="fill" style="background-color: white; border-radius: 18px;">
+        <mat-label>Seleccionar...</mat-label>
+        <mat-select [(ngModel)]="selectedValue" name="viajeOption">
+          <mat-option *ngFor="let v of viaje" [value]="v.value">
+            {{v.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+  </div>
+  <div class="cardsInfo">
+    <mat-card *ngFor="let item of obs | async">
+      <div class="content">
+        <mat-card-content>
+          <p>Direccion: {{item.travelEquipmentDTOs[item.travelEquipmentDTOs.length - 1].equipment.cliente.address}}</p>
+          <p>Hora: {{item.travelEquipmentDTOs[item.travelEquipmentDTOs.length - 1].operationDate |
+            date: 'short' | date: 'dd/MM/yy, h:mm a'}}</p>
+          <p>Equipo: {{item.travelEquipmentDTOs[item.travelEquipmentDTOs.length - 1].equipment.mark + " " +
+            item.travelEquipmentDTOs[item.travelEquipmentDTOs.length - 1].equipment.model}}</p>
+          <p>Estado del viaje: {{item.lastStatusTravel}}</p>
+        </mat-card-content>
+      </div>
+
+      <div class="Like">
+        <mat-card-actions>
+          <button mat-button>
+            <mat-icon>thumb_up_alt</mat-icon>
+          </button>
+        </mat-card-actions>
+      </div>
+    </mat-card>
+    <mat-paginator [pageSizeOptions]="[3]"></mat-paginator>
+  </div>
+</section>
