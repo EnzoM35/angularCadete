@@ -67,6 +67,7 @@ export class LoginComponent implements OnInit {
       (resp) => {
         if (resp.rol.id === 2) {
           localStorage.setItem('UserLoged', JSON.stringify(resp));
+          localStorage.setItem('id', JSON.stringify(resp.id));
           console.log('Logeado con éxtito');
           this.isTravelsRoute();
         } else {

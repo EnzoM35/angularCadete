@@ -1,18 +1,20 @@
 <section class="travelMain">
   <div class="info">
     <form>
-      <mat-form-field appearance="fill" style="background-color: white; border-radius: 18px;">
-        <mat-label>Seleccionar...</mat-label>
-        <mat-select [(ngModel)]="selectedValue" name="viajeOption">
-          <mat-option *ngFor="let v of viaje" [value]="v.value">
-            {{v.viewValue}}
-          </mat-option>
+      <mat-form-field appearance="fill" style="background-color: white; border-radius: 3px;">
+        <mat-label>Viajes</mat-label>
+        <mat-select [(value)]="selected">
+          <mat-option value="Viajes disponibles" (click)="onChange()">Viajes disponibles</mat-option>
+          <mat-option value="Viajes aceptados" (click)="viewAcept()">Viajes aceptados</mat-option>
         </mat-select>
       </mat-form-field>
     </form>
   </div>
-  <div class="cardsInfo">
-    <mat-card *ngFor="let item of obs | async">
+
+  <!-- VIAJES DISPONIBLES-->
+
+  <div class="cardsInfo" *ngIf="selected === 'Viajes disponibles' " id="cardDisp">
+    <mat-card *ngFor=" let item of obs | async">
       <div class="content">
         <mat-card-content>
           <p>Direccion: {{item.travelEquipmentDTOs[item.travelEquipmentDTOs.length - 1].equipment.cliente.address}}</p>
@@ -31,6 +33,26 @@
           </button>
         </mat-card-actions>
       </div>
+    </mat-card>
+    <mat-paginator [pageSizeOptions]="[3]"></mat-paginator>
+  </div>
+
+  <!--VIAJES ACEPTADOS-->
+
+  <div class="cardsInfo" *ngIf="selected === 'Viajes aceptados' ">
+    <mat-card *ngFor=" let item of obs | async">
+      <div class="content">
+        <mat-card-content>
+          <p>Direccion: {{item.travelEquipmentDTOs[item.travelEquipmentDTOs.length - 1].equipment.cliente.address}}</p>
+          <p>Hora: {{item.travelEquipmentDTOs[item.travelEquipmentDTOs.length - 1].operationDate |
+            date: 'short' | date: 'dd/MM/yy, h:mm a'}}</p>
+          <p>Equipo: {{item.travelEquipmentDTOs[item.travelEquipmentDTOs.length - 1].equipment.mark + " " +
+            item.travelEquipmentDTOs[item.travelEquipmentDTOs.length - 1].equipment.model}}</p>
+          <p>Estado del viaje: {{item.lastStatusTravel}}</p>
+        </mat-card-content>
+      </div>
+
+
     </mat-card>
     <mat-paginator [pageSizeOptions]="[3]"></mat-paginator>
   </div>
