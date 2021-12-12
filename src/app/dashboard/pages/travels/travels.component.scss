@@ -17,29 +17,10 @@
   }
 }
 
-.cardsInfo {
-  background-color: white;
-  overflow: hidden;
-}
-
-mat-card {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  //margin: 0 auto;
-  text-align: left;
-  padding: 0.5em;
-  line-height: 1;
-
-  .Like {
-    padding-top: 3%;
-    padding-right: 5%;
-  }
-}
-
 .travelMain {
   text-align: center;
-  app-card-travel {
+  app-card-travel,
+  app-card-travel-acept {
     margin-top: 3%;
     display: flex;
     justify-content: center;

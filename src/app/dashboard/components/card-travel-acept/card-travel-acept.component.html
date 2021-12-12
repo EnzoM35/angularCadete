@@ -2,7 +2,8 @@
   <mat-card *ngFor=" let item of obs | async">
     <div class="content">
       <mat-card-content>
-        <p>Direccion: {{item.travelEquipmentDTOs[item.travelEquipmentDTOs.length - 1].equipment.cliente.address}}</p>
+        <p>Direccion: {{item.travelEquipmentDTOs[item.travelEquipmentDTOs.length - 1].equipment.cliente.address}}
+        </p>
         <p>Hora: {{item.travelEquipmentDTOs[item.travelEquipmentDTOs.length - 1].operationDate |
           date: 'short' | date: 'dd/MM/yy, h:mm a'}}</p>
         <p>Equipo: {{item.travelEquipmentDTOs[item.travelEquipmentDTOs.length - 1].equipment.mark + " " +
@@ -10,13 +11,28 @@
         <p>Estado del viaje: {{item.lastStatusTravel}}</p>
       </mat-card-content>
     </div>
+    <div class="btnCourse">
+      <div class="finished" id="btnS">
 
-    <div class="Like">
-      <mat-card-actions>
-        <button mat-button (click)="asignarViaje(item)">
-          <mat-icon>thumb_up_alt</mat-icon>
+        <button mat-button>
+          <mat-icon style="color: white;">done</mat-icon>
         </button>
-      </mat-card-actions>
+
+      </div>
+      <div class="retired" id="btnS">
+
+        <button mat-button>
+          <mat-icon>assignment_return</mat-icon>
+        </button>
+
+      </div>
+      <div class="renounced" id="btnS">
+
+        <button mat-button>
+          <mat-icon style="color: white;">close</mat-icon>
+        </button>
+
+      </div>
     </div>
   </mat-card>
   <mat-paginator [pageSizeOptions]="[3]"></mat-paginator>

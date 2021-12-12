@@ -1,5 +1,6 @@
 <div class="cardsInfo">
-  <mat-card *ngFor=" let item of obs | async">
+  <mat-card *ngFor=" let item of obs | async"
+    [ngStyle]="{'background-color': item.lastStatusTravel === 8 ? 'yellow' : 'green'}">
     <div class="content">
       <mat-card-content>
         <p>Direccion: {{item.travelEquipmentDTOs[item.travelEquipmentDTOs.length - 1].equipment.cliente.address}}</p>
@@ -7,17 +8,30 @@
           date: 'short' | date: 'dd/MM/yy, h:mm a'}}</p>
         <p>Equipo: {{item.travelEquipmentDTOs[item.travelEquipmentDTOs.length - 1].equipment.mark + " " +
           item.travelEquipmentDTOs[item.travelEquipmentDTOs.length - 1].equipment.model}}</p>
-        <p>Estado del viaje: {{item.lastStatusTravel}}</p>
+        <p>Estado del viaje: {{item.lastStatusTravel| number | i18nSelect:
+          estadoMap}}</p>
       </mat-card-content>
     </div>
 
-    <div class="Like">
-      <mat-card-actions>
-        <button mat-button (click)="asignarViaje(item)">
-          <mat-icon>thumb_up_alt</mat-icon>
-        </button>
-      </mat-card-actions>
+    <div *ngIf="item.lastStatusTravel === 8">
+
+      <button mat-button>
+        <mat-icon>warning</mat-icon>
+      </button>
+
     </div>
+
+
+    <div class="done" *ngIf="item.lastStatusTravel === 9">
+
+      <button mat-button>
+        <mat-icon>done_outline</mat-icon>
+      </button>
+
+    </div>
+
   </mat-card>
+
+
   <mat-paginator [pageSizeOptions]="[3]"></mat-paginator>
 </div>

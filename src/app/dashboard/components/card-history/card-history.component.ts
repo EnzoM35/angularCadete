@@ -15,12 +15,13 @@ import { MatPaginator } from '@angular/material/paginator';
 import { serviceAssignTrip } from '../../services/serviceAssignTrip';
 import { DialogComponent } from 'src/app/auth/components/dialog/dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+
 @Component({
-  selector: 'app-card-travel',
-  templateUrl: './card-travel.component.html',
-  styleUrls: ['./card-travel.component.scss'],
+  selector: 'app-card-history',
+  templateUrl: './card-history.component.html',
+  styleUrls: ['./card-history.component.scss'],
 })
-export class CardTravelComponent implements OnInit {
+export class CardHistoryComponent implements OnInit {
   viajesArray: Viaje[];
   //PAGINATOR
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -33,13 +34,32 @@ export class CardTravelComponent implements OnInit {
     public dialog: MatDialog
   ) {}
 
-  //REQUEST VIAJES DISPONIBLES
-  viajesDisponibles() {
-    let status1 = this.http.get<Viaje[]>('/api/Travel/2/1');
-    let status5 = this.http.get<Viaje[]>('/api/Travel/2/5');
+  estadoMap: any = {
+    '4': 'Entregado al laboratorio',
+    '8': 'Entregado (Esperando confirmación)',
+    other: '-',
+  };
 
-    +forkJoin([status1, status5]).subscribe((results) => {
+  //REQUEST VIAJES DISPONIBLES
+  viajesRealizados() {
+    let idCadete = JSON.parse(localStorage.getItem('id')!);
+    let status4 = this.http.get<Viaje[]>('/api/Travel/2/4');
+    let status8 = this.http.get<Viaje[]>('/api/Travel/2/8');
+
+    +forkJoin([status4, status8]).subscribe((results) => {
       this.viajesArray = [...results[0], ...results[1]];
+
+      this.viajesArray = this.viajesArray.filter((item) => {
+        if (
+          item.travelEquipmentDTOs[item.travelEquipmentDTOs.length - 1].cadete
+        ) {
+          return (
+            item.travelEquipmentDTOs[item.travelEquipmentDTOs.length - 1].cadete
+              .id === idCadete
+          );
+        }
+        return false;
+      });
 
       this.viajesArray.sort(function (a, b) {
         return (
@@ -60,35 +80,8 @@ export class CardTravelComponent implements OnInit {
     });
   }
 
-  //POST ASIGNAR VIAJE
-  asignarViaje(item: Viaje) {
-    let userO: number = JSON.parse(localStorage.getItem('rolID')!);
-    let idCadete: number = JSON.parse(localStorage.getItem('id')!);
-
-    let asignar: asignarViaje = {
-      travelID: item.id,
-      statusTravel: 2,
-      userOperation: userO,
-      cadeteID: idCadete,
-      isReasigned: false,
-    };
-
-    this.assignService.assign(asignar).subscribe(
-      (resp) => {
-        this.openDialog('Viaje asignado!');
-        this.viajesDisponibles();
-      },
-      (error) => {
-        console.clear();
-        this.openDialog(
-          'Ya no puedes asignarte mas viajes(Máximo 4), completa los que tienes en curso!'
-        );
-      }
-    );
-  }
-
   ngOnInit(): void {
-    this.viajesDisponibles();
+    this.viajesRealizados();
   }
 
   //Diálogo para confirmar

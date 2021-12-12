@@ -12,7 +12,9 @@ mat-card {
   padding: 0.5em;
   line-height: 1;
 
-  .Like {
+  .done {
+    background-color: green;
+    color: white;
     padding-top: 3%;
     padding-right: 5%;
   }
