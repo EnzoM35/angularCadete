@@ -1,11 +1,24 @@
-<div mat-dialog-content *ngFor="let item of data">
-  <ul>
-    {{item}}
-  </ul>
-</div>
+<div class="mainDialog">
+  <div class="close"><button (click)="onNoClick()">
+      <mat-icon style="color: white;">close</mat-icon>
+    </button></div>
 
-<div mat-dialog-actions>
+  <h3>Acá podes ver los datos del viaje en detalle.</h3>
+  <div mat-dialog-content *ngFor="let item of arrayShow">
+    <ul>
+      <li>{{item}}</li>
+    </ul>
+  </div>
+  <div class="botones">
+    <div *ngIf="showFinished(arrayShow[3])">
+      <button mat-flat-button style="background-color: green; color: white;" (click)="finished()">Entregar</button>
 
-  <button mat- raised-button (click)="onNoClick()"> OK </button>
+    </div>
+    <div *ngIf="showRR(arrayShow[3])">
+      <button mat-flat-button style="background-color: red; color: white; margin-right: 2em;"
+        (click)="renounced()">Renunciar</button>
+      <button mat-flat-button style="background-color: yellow; color: black;" (click)="retiredTrip()">Retirar</button>
+    </div>
 
+  </div>
 </div>

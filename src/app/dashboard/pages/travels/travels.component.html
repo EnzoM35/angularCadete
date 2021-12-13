@@ -17,6 +17,10 @@
 
       </mat-select>
     </mat-form-field>
+
+    <div *ngIf="selected == ''">
+      <img src="../../../../assets/delivery2.png" alt="" width="300px" height="300px" style="padding-top: 2.5em;">
+    </div>
     <!-- VIAJES DISPONIBLES-->
 
     <div *ngIf=' selected == "viajesDisponibles"'>

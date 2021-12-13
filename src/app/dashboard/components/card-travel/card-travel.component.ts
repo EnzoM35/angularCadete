@@ -99,4 +99,10 @@ export class CardTravelComponent implements OnInit {
       width: '350px',
     });
   }
+
+  estadoMap: any = {
+    '1': 'Solicitud de retiro en domicilio',
+    '5': 'Solicitud de retiro en laboratorio',
+    other: '-',
+  };
 }

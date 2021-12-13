@@ -7,7 +7,8 @@
           date: 'short' | date: 'dd/MM/yy, h:mm a'}}</p>
         <p>Equipo: {{item.travelEquipmentDTOs[item.travelEquipmentDTOs.length - 1].equipment.mark + " " +
           item.travelEquipmentDTOs[item.travelEquipmentDTOs.length - 1].equipment.model}}</p>
-        <p>Estado del viaje: {{item.lastStatusTravel}}</p>
+        <p>Estado del viaje: {{item.lastStatusTravel | number | i18nSelect:
+          estadoMap}}</p>
       </mat-card-content>
     </div>
 

@@ -1,14 +1,16 @@
+<h3 *ngIf="zero">No tienes viajes asignados</h3>
 <div class="cardsInfo">
-  <mat-card *ngFor=" let item of obs | async" (click)="show(item)">
+  <mat-card *ngFor=" let item of obs | async">
     <div class="content">
-      <mat-card-content>
+      <mat-card-content (click)="show(item)">
         <p>Direccion: {{item.travelEquipmentDTOs[item.travelEquipmentDTOs.length - 1].equipment.cliente.address}}
         </p>
-        <p>Hora: {{item.travelEquipmentDTOs[item.travelEquipmentDTOs.length - 1].operationDate |
+        <p>Fecha: {{item.travelEquipmentDTOs[item.travelEquipmentDTOs.length - 1].operationDate |
           date: 'short' | date: 'dd/MM/yy, h:mm a'}}</p>
         <p>Equipo: {{item.travelEquipmentDTOs[item.travelEquipmentDTOs.length - 1].equipment.mark + " " +
           item.travelEquipmentDTOs[item.travelEquipmentDTOs.length - 1].equipment.model}}</p>
-        <p>Estado del viaje: {{item.lastStatusTravel}}</p>
+        <p>Estado del viaje: {{item.lastStatusTravel | number | i18nSelect:
+          estadoMap}}</p>
       </mat-card-content>
     </div>
     <div class="btnCourse">
@@ -35,5 +37,5 @@
       </div>
     </div>
   </mat-card>
-  <mat-paginator [pageSizeOptions]="[3]"></mat-paginator>
+  <mat-paginator [pageSizeOptions]="[3]" *ngIf="!zero"></mat-paginator>
 </div>

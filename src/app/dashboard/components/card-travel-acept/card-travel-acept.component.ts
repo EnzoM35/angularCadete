@@ -8,6 +8,7 @@ import {
   OnDestroy,
   ViewChild,
   ChangeDetectorRef,
+  Output,
 } from '@angular/core';
 import { Observable } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
@@ -24,6 +25,7 @@ import { DialogCourseComponent } from '../dialog-course/dialog-course.component'
 })
 export class CardTravelAceptComponent implements OnInit {
   viajesAcept: Viaje[];
+  zero: boolean;
   //PAGINATOR
   @ViewChild(MatPaginator) paginator: MatPaginator;
   obs: Observable<any>;
@@ -81,11 +83,13 @@ export class CardTravelAceptComponent implements OnInit {
         );
       });
 
+      if (this.viajesAcept.length === 0) {
+        this.zero = true;
+      }
       this.dataSource = new MatTableDataSource<Viaje>(this.viajesAcept);
       this.changeDetectorRef.detectChanges();
       this.dataSource.paginator = this.paginator;
       this.obs = this.dataSource.connect();
-      console.log(this.viajesAcept);
     });
   }
 
@@ -137,6 +141,7 @@ export class CardTravelAceptComponent implements OnInit {
     }
   }
 
+  //BOTON RENUNCIAR VIAJE
   renounced(item: Viaje) {
     if (item.lastStatusTravel === 2 || item.lastStatusTravel === 6) {
       let status: number = item.lastStatusTravel - 1;
@@ -169,30 +174,12 @@ export class CardTravelAceptComponent implements OnInit {
 
   //Mostrar envío en detalle
   show(item: Viaje): void {
-    let adress: string =
-      item.travelEquipmentDTOs[item.travelEquipmentDTOs.length - 1].equipment
-        .cliente.address;
-    let date: string =
-      item.travelEquipmentDTOs[item.travelEquipmentDTOs.length - 1]
-        .operationDate;
-    let equipment: string =
-      item.travelEquipmentDTOs[item.travelEquipmentDTOs.length - 1].equipment
-        .mark +
-      ' ' +
-      item.travelEquipmentDTOs[item.travelEquipmentDTOs.length - 1].equipment
-        .model;
-    let status: string = item.lastStatusTravel.toString();
-
-    let array: string[] = [];
-
-    array.push(adress);
-    array.push(date);
-    array.push(equipment);
-    array.push(status);
-
     this.dialog.open(DialogCourseComponent, {
-      data: array,
+      data: item,
       width: '400px',
+    });
+    this.dialog.afterAllClosed.subscribe((resp) => {
+      this.ngOnInit();
     });
   }
 
@@ -213,4 +200,12 @@ export class CardTravelAceptComponent implements OnInit {
       return false;
     }
   }
+
+  estadoMap: any = {
+    '2': 'Aceptaste el viaje',
+    '3': 'Tenés el envío en tu poder',
+    '6': 'Aceptaste este viaje',
+    '7': 'Tenés el envío en tu poder',
+    other: '-',
+  };
 }
