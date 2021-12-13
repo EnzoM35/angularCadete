@@ -3,7 +3,7 @@
     <div class="content">
       <mat-card-content>
         <p>Direccion: {{item.travelEquipmentDTOs[item.travelEquipmentDTOs.length - 1].equipment.cliente.address}}</p>
-        <p>Hora: {{item.travelEquipmentDTOs[item.travelEquipmentDTOs.length - 1].operationDate |
+        <p>Fecha: {{item.travelEquipmentDTOs[item.travelEquipmentDTOs.length - 1].operationDate |
           date: 'short' | date: 'dd/MM/yy, h:mm a'}}</p>
         <p>Equipo: {{item.travelEquipmentDTOs[item.travelEquipmentDTOs.length - 1].equipment.mark + " " +
           item.travelEquipmentDTOs[item.travelEquipmentDTOs.length - 1].equipment.model}}</p>
