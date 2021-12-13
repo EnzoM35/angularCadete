@@ -13,9 +13,12 @@ mat-card {
   line-height: 1;
 
   .done {
-    background-color: green;
     color: white;
-    padding-top: 3%;
-    padding-right: 5%;
+    padding-top: 5%;
+    padding-right: 10%;
+  }
+  .warning {
+    padding-top: 5%;
+    padding-right: 10%;
   }
 }

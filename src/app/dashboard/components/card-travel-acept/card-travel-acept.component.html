@@ -1,5 +1,5 @@
 <div class="cardsInfo">
-  <mat-card *ngFor=" let item of obs | async">
+  <mat-card *ngFor=" let item of obs | async" (click)="show(item)">
     <div class="content">
       <mat-card-content>
         <p>Direccion: {{item.travelEquipmentDTOs[item.travelEquipmentDTOs.length - 1].equipment.cliente.address}}
@@ -12,23 +12,23 @@
       </mat-card-content>
     </div>
     <div class="btnCourse">
-      <div class="finished" id="btnS">
+      <div class="finished" id="btnS" *ngIf="showFinished(item.lastStatusTravel)">
 
-        <button mat-button>
+        <button mat-button (click)="finished(item)">
           <mat-icon style="color: white;">done</mat-icon>
         </button>
 
       </div>
-      <div class="retired" id="btnS">
+      <div class="retired" id="btnS" *ngIf="showRR(item.lastStatusTravel)">
 
-        <button mat-button>
+        <button mat-button (click)="retiredTrip(item)">
           <mat-icon>assignment_return</mat-icon>
         </button>
 
       </div>
-      <div class="renounced" id="btnS">
+      <div class="renounced" id="btnS" *ngIf="showRR(item.lastStatusTravel)">
 
-        <button mat-button>
+        <button mat-button (click)="renounced(item)">
           <mat-icon style="color: white;">close</mat-icon>
         </button>
 

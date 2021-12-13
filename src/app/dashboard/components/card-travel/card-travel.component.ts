@@ -62,12 +62,13 @@ export class CardTravelComponent implements OnInit {
 
   //POST ASIGNAR VIAJE
   asignarViaje(item: Viaje) {
+    let status: number = item.lastStatusTravel + 1;
     let userO: number = JSON.parse(localStorage.getItem('rolID')!);
     let idCadete: number = JSON.parse(localStorage.getItem('id')!);
 
     let asignar: asignarViaje = {
       travelID: item.id,
-      statusTravel: 2,
+      statusTravel: status,
       userOperation: userO,
       cadeteID: idCadete,
       isReasigned: false,

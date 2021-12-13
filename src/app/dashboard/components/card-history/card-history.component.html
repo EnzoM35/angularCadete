@@ -3,7 +3,8 @@
     [ngStyle]="{'background-color': item.lastStatusTravel === 8 ? 'yellow' : 'green'}">
     <div class="content">
       <mat-card-content>
-        <p>Direccion: {{item.travelEquipmentDTOs[item.travelEquipmentDTOs.length - 1].equipment.cliente.address}}</p>
+        <p>Direccion: {{item.travelEquipmentDTOs[item.travelEquipmentDTOs.length -
+          1].equipment.cliente.address}}</p>
         <p>Hora: {{item.travelEquipmentDTOs[item.travelEquipmentDTOs.length - 1].operationDate |
           date: 'short' | date: 'dd/MM/yy, h:mm a'}}</p>
         <p>Equipo: {{item.travelEquipmentDTOs[item.travelEquipmentDTOs.length - 1].equipment.mark + " " +
@@ -13,21 +14,13 @@
       </mat-card-content>
     </div>
 
-    <div *ngIf="item.lastStatusTravel === 8">
-
-      <button mat-button>
-        <mat-icon>warning</mat-icon>
-      </button>
-
+    <div *ngIf="item.lastStatusTravel === 8" class="warning">
+      <mat-icon>warning</mat-icon>
     </div>
 
 
-    <div class="done" *ngIf="item.lastStatusTravel === 9">
-
-      <button mat-button>
-        <mat-icon>done_outline</mat-icon>
-      </button>
-
+    <div class="done" *ngIf="item.lastStatusTravel === 9 || item.lastStatusTravel === 4 ">
+      <mat-icon>done_outline</mat-icon>
     </div>
 
   </mat-card>
