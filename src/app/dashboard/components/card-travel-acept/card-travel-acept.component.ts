@@ -26,11 +26,11 @@ import { DialogCourseComponent } from '../dialog-course/dialog-course.component'
 export class CardTravelAceptComponent implements OnInit {
   viajesAcept: Viaje[];
   zero: boolean;
-  //PAGINATOR
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   obs: Observable<any>;
   dataSource: MatTableDataSource<Viaje>;
-  //SELECT
+
   constructor(
     private http: HttpClient,
     private changeDetectorRef: ChangeDetectorRef,

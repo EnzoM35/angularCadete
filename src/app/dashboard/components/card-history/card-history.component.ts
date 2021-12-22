@@ -23,7 +23,7 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class CardHistoryComponent implements OnInit {
   viajesArray: Viaje[];
-  //PAGINATOR
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   obs: Observable<any>;
   dataSource: MatTableDataSource<Viaje>;
@@ -40,7 +40,6 @@ export class CardHistoryComponent implements OnInit {
     other: '-',
   };
 
-  //REQUEST VIAJES DISPONIBLES
   viajesRealizados() {
     let idCadete = JSON.parse(localStorage.getItem('id')!);
     let status4 = this.http.get<Viaje[]>('/api/Travel/2/4');
@@ -64,11 +63,11 @@ export class CardHistoryComponent implements OnInit {
       this.viajesArray.sort(function (a, b) {
         return (
           Date.parse(
-            a.travelEquipmentDTOs[a.travelEquipmentDTOs.length - 1]
+            b.travelEquipmentDTOs[b.travelEquipmentDTOs.length - 1]
               .operationDate
           ) -
           Date.parse(
-            b.travelEquipmentDTOs[b.travelEquipmentDTOs.length - 1]
+            a.travelEquipmentDTOs[a.travelEquipmentDTOs.length - 1]
               .operationDate
           )
         );

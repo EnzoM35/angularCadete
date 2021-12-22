@@ -1,6 +1,6 @@
 <div class="cardsInfo">
   <mat-card *ngFor=" let item of obs | async"
-    [ngStyle]="{'background-color': item.lastStatusTravel === 8 ? 'yellow' : 'green'}">
+    [ngStyle]="{'background-color': item.lastStatusTravel === 8 ? 'yellow' : '#55d154'}">
     <div class="content">
       <mat-card-content>
         <p>Direccion: {{item.travelEquipmentDTOs[item.travelEquipmentDTOs.length -

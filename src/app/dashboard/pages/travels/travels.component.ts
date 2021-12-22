@@ -18,7 +18,7 @@ import { MatPaginator } from '@angular/material/paginator';
   styleUrls: ['./travels.component.scss'],
 })
 export class TravelsComponent implements OnInit {
-  selected: string = ''; // Iniciamos
+  selected: string = '';
   verSelected: string = '';
 
   capturar() {
@@ -28,8 +28,6 @@ export class TravelsComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
-
-  //REQUEST VIAJES ACEPTADOS
 
   onChange() {}
 

@@ -1,17 +1,28 @@
 .cardsInfo {
-  background-color: white;
+  background-color: transparent;
   overflow: hidden;
+  width: 90%;
+  padding-top: 1em;
 }
 
 mat-card {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  //margin: 0 auto;
+  padding: 0;
+  padding-top: 0.3em;
+  padding-left: 0.3em;
   text-align: left;
-  padding: 0.5em;
+  margin-bottom: 3%;
   line-height: 1;
-
+  .Like {
+    button {
+      background-color: rgb(84, 209, 84);
+    }
+    color: white;
+    margin-top: 1em;
+    margin-right: 1.5em;
+  }
   .done {
     color: white;
     padding-top: 5%;
@@ -21,4 +32,8 @@ mat-card {
     padding-top: 5%;
     padding-right: 10%;
   }
+}
+
+mat-paginator {
+  border-radius: 18px;
 }

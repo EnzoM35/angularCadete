@@ -4,11 +4,10 @@ import { MaterialModule } from '../../material.module';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
-import { MainLoginComponent } from './main-login/main-login.component';
 
 @NgModule({
-  declarations: [LoginComponent, MainLoginComponent],
+  declarations: [LoginComponent],
   imports: [CommonModule, MaterialModule, RouterModule, ReactiveFormsModule],
-  exports: [LoginComponent, MainLoginComponent],
+  exports: [LoginComponent],
 })
 export class ComponentsModule {}

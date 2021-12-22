@@ -17,7 +17,6 @@ import { MatPaginator } from '@angular/material/paginator';
 import { serviceChange } from '../../services/serviceChange';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from 'src/app/auth/components/dialog/dialog.component';
-import { CardTravelAceptComponent } from '../card-travel-acept/card-travel-acept.component';
 
 @Component({
   selector: 'app-dialog-course',

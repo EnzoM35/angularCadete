@@ -22,7 +22,6 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class CardTravelComponent implements OnInit {
   viajesArray: Viaje[];
-  //PAGINATOR
   @ViewChild(MatPaginator) paginator: MatPaginator;
   obs: Observable<any>;
   dataSource: MatTableDataSource<Viaje>;
@@ -33,7 +32,6 @@ export class CardTravelComponent implements OnInit {
     public dialog: MatDialog
   ) {}
 
-  //REQUEST VIAJES DISPONIBLES
   viajesDisponibles() {
     let status1 = this.http.get<Viaje[]>('/api/Travel/2/1');
     let status5 = this.http.get<Viaje[]>('/api/Travel/2/5');
@@ -60,7 +58,6 @@ export class CardTravelComponent implements OnInit {
     });
   }
 
-  //POST ASIGNAR VIAJE
   asignarViaje(item: Viaje) {
     let status: number = item.lastStatusTravel + 1;
     let userO: number = JSON.parse(localStorage.getItem('rolID')!);

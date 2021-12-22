@@ -1,4 +1,4 @@
-<section class="travelMain">
+<div class="travelMain">
   <div class="info">
     <mat-form-field appearance="fill" style="font-size: 12px; border-radius: 3px; background-color: white;">
       <mat-label>Selecciona una opción</mat-label>
@@ -17,22 +17,39 @@
 
       </mat-select>
     </mat-form-field>
-
-    <div *ngIf="selected == ''">
-      <img src="../../../../assets/delivery2.png" alt="" width="300px" height="300px" style="padding-top: 2.5em;">
+    <div class="desc">
+      <div *ngIf="selected == ''">
+        Bienvenido! Selecciona una opcion para administrar tus viajes!
+      </div>
+      <div *ngIf=' selected == "viajesDisponibles"'>
+        Viajes disponibles. Aqui podras asignarte un viaje.
+      </div>
+      <div *ngIf=' selected == "viajesAceptados"'>
+        Viajes en curso. Aqui podras retirar, entregar y rechazar un viaje.
+      </div>
+      <div *ngIf=' selected == "historial"'>
+        Historial. el historial de todos tus viajes realizados.
+      </div>
     </div>
-    <!-- VIAJES DISPONIBLES-->
+  </div>
 
-    <div *ngIf=' selected == "viajesDisponibles"'>
-      <app-card-travel></app-card-travel>
-    </div>
+  <div *ngIf="selected == ''">
+    <img src="../../../../assets/arrow_up.gif" alt="" width="100px" height="100px" class="arrowImg">
+    <img src="../../../../assets/delivery2.png" alt="" width="300px" height="300px" class="deliveryImg">
+  </div>
+  <!-- VIAJES DISPONIBLES-->
 
-    <!--VIAJES ACEPTADOS-->
-    <div *ngIf=' selected == "viajesAceptados"'>
-      <app-card-travel-acept></app-card-travel-acept>
-    </div>
+  <div *ngIf=' selected == "viajesDisponibles"'>
+    <app-card-travel></app-card-travel>
+  </div>
 
-    <!--HISTORIAL-->
-    <div *ngIf=' selected == "historial"'>
-      <app-card-history></app-card-history>
-    </div>
+  <!--VIAJES ACEPTADOS-->
+  <div *ngIf=' selected == "viajesAceptados"'>
+    <app-card-travel-acept></app-card-travel-acept>
+  </div>
+
+  <!--HISTORIAL-->
+  <div *ngIf=' selected == "historial"'>
+    <app-card-history></app-card-history>
+  </div>
+</div>
